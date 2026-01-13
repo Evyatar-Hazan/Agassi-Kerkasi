@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: linear-gradient(135deg, #fff9e6 0%, #ffe4cc 100%);
+  background: linear-gradient(135deg, #e8f5f0 0%, #d1e7df 100%);
   padding: var(--space-2xl);
 }
 

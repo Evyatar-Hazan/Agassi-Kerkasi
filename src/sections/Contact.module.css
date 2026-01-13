@@ -1,6 +1,6 @@
 .contact {
   padding: var(--space-2xl) 0;
-  background: linear-gradient(135deg, #ff6b35 0%, #ff8c5a 100%);
+  background: linear-gradient(135deg, #157b61 0%, #1a9970 100%);
   color: var(--color-white);
   animation: fadeIn 0.8s ease-out;
 }

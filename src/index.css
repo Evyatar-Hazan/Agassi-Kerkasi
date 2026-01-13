@@ -7,9 +7,9 @@
   --font-secondary: 'Courier New', monospace;
   
   /* Colors */
-  --color-primary: #ff6b35;      /* Vibrant Orange - Circus theme */
-  --color-secondary: #004e89;    /* Deep Blue */
-  --color-accent: #f7b801;       /* Gold Accent */
+  --color-primary: #157b61;      /* Teal Green - Primary */
+  --color-secondary: #0f5a47;    /* Darker Teal - Secondary */
+  --color-accent: #f39c12;       /* Warm Amber - Accent */
   --color-light: #f5f5f5;
   --color-dark: #1a1a1a;
   --color-white: #ffffff;
