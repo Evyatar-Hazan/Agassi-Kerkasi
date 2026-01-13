@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import type { Service } from '../types';
 import ServiceCard from '../components/ServiceCard';
 import styles from './Services.module.css';
@@ -6,8 +6,34 @@ import styles from './Services.module.css';
 /**
  * Services Section Component
  * Displays all available services as a grid of cards
+ * Features scroll-based animations
  */
 const Services: React.FC = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      if (containerRef.current) {
+        observer.unobserve(containerRef.current);
+      }
+    };
+  }, []);
+
   const services: Service[] = [
     {
       id: 'juggling',
@@ -48,22 +74,27 @@ const Services: React.FC = () => {
   ];
 
   return (
-    <section className={styles.services} id="services">
+    <section className={styles.services} id="services" ref={containerRef}>
       <div className={styles.container}>
-        <h2 className={styles.heading}>השירותים שלנו</h2>
-        <p className={styles.subheading}>
+        <h2 className={`${styles.heading} ${isVisible ? 'scroll-reveal-up visible' : 'scroll-reveal-up'}`}>
+          השירותים שלנו
+        </h2>
+        <p className={`${styles.subheading} ${isVisible ? 'scroll-reveal-up visible' : 'scroll-reveal-up'}`} style={{ transitionDelay: '0.1s' }}>
           בחר מתוך מגוון שירותים וחבילות, או בנה חבילה מותאמת אישית
         </p>
 
         <div className={styles.grid}>
-          {services.map((service, index) => (
-            <ServiceCard
+          {services.map((service) => (
+            <div
               key={service.id}
-              icon={service.icon}
-              title={service.title}
-              description={service.description}
-              index={index}
-            />
+              className={`scroll-reveal-stagger ${isVisible ? 'visible' : ''}`}
+            >
+              <ServiceCard
+                icon={service.icon}
+                title={service.title}
+                description={service.description}
+              />
+            </div>
           ))}
         </div>
       </div>
